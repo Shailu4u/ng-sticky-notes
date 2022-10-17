@@ -1,0 +1,16 @@
+<button
+  class="btn btn-primary"
+  (click)="isOpen = !isOpen"
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin"
+>
+  Add Note
+</button>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+>
+  <app-note></app-note>
+</ng-template>

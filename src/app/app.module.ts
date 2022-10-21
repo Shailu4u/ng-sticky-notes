@@ -2,21 +2,27 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { OverlayModule } from '@angular/cdk/overlay';
+import {
+  FullscreenOverlayContainer,
+  OverlayContainer,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 
 import { AppComponent } from './app.component';
-import { NoteComponent } from './sticky-notes/note/note.component';
+import { StickyNoteComponent } from './sticky-notes/sticky-note/sticky-note.component';
 import { NoteContainerComponent } from './sticky-notes/note-container/note-container.component';
 
 @NgModule({
-  declarations: [AppComponent, NoteComponent, NoteContainerComponent],
+  declarations: [AppComponent, StickyNoteComponent, NoteContainerComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     DragDropModule,
     OverlayModule,
   ],
-  providers: [],
+  providers: [
+    { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

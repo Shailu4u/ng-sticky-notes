@@ -1,14 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { StickyNoteService } from '../sticky-note/sticky-note.service';
 
 @Component({
-  selector: 'app-note-container',
+  selector: 'app-sticky-note-container',
   templateUrl: './note-container.component.html',
   styleUrls: ['./note-container.component.scss'],
 })
 export class NoteContainerComponent implements OnInit {
-  isOpen = false;
+  @ViewChild('StickyNoteTemplate', {
+    read: ViewContainerRef,
+  })
+  stickyNoteTemplate: ViewContainerRef;
 
-  constructor() {}
+  constructor(private stickyNoteService: StickyNoteService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listenOpenStickyNotes();
+  }
+
+  private listenOpenStickyNotes(): void {
+    this.stickyNoteService.open(() => this.stickyNoteTemplate);
+  }
+
+  openNote() {
+    this.stickyNoteService.initOpenNote({
+      content: 'sdfsdf',
+    });
+  }
 }
